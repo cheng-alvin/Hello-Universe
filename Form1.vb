@@ -1,5 +1,5 @@
 ﻿Public Class Form1
-
+    Dim isSize As Boolean = False
     ' Sets the content of the text box
     Private Sub helloBtn_Click(sender As Object, e As EventArgs) Handles helloBtn.Click
         txt.Text = "Hello, Universe 2! " & Today
@@ -35,7 +35,12 @@
 
     ' Assign and subtract 10 from `Left`
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        txt.Left -= 10
+        If isSize = False Then
+            txt.Left -= 10
+        Else
+            txt.Width -= 10
+        End If
+
     End Sub
 
 
@@ -46,17 +51,31 @@
 
     ' Adding 10 to `Left` (negation of the `txt.Left -= 10` operation)
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
-        txt.Left += 10
+        If isSize = False Then
+            txt.Left += 10
+        Else
+            txt.Width += 10
+        End If
+
     End Sub
 
     ' Subtracting from `Top` to go down
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        txt.Top -= 10
+        If isSize = False Then
+            txt.Top -= 10
+        Else
+            txt.Height -= 10
+        End If
     End Sub
 
     ' Adds to `Top` to move upwards
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
-        txt.Top += 10
+        If isSize = False Then
+            txt.Top += 10
+        Else
+            txt.Height += 10
+        End If
+
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -99,5 +118,35 @@
 
     Private Sub exitBtn_Click(sender As Object, e As EventArgs) Handles exitBtn.Click
         End
+    End Sub
+    Private Sub Button15_Click_1(sender As Object, e As EventArgs) Handles Button15.Click
+        txt.Font = New Font("Tahoma", 11, FontStyle.Italic)
+    End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        txt.Font = New Font("Verdana", 14, FontStyle.Strikeout)
+    End Sub
+
+    Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
+        isSize = Not (isSize)
+        If Button17.Text = "Change size" Then
+            txt.Multiline = True
+            Button17.Text = "Change position"
+            Button13.Text = "Wider"
+            Button6.Text = "Slimmer"
+            Button7.Text = "Shrink"
+            Button12.Text = "Expand"
+        Else
+            txt.Multiline = False
+            Button17.Text = "Change size"
+            Button13.Text = "Left"
+            Button6.Text = "Right"
+            Button7.Text = "Up"
+            Button12.Text = "Down"
+        End If
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
